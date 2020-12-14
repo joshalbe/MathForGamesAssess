@@ -25,7 +25,7 @@ namespace TestLibrary
             _z = Z;
         }
 
-        public float x
+        public float X
         {
             get
             {
@@ -37,7 +37,7 @@ namespace TestLibrary
             }
         }
 
-        public float y
+        public float Y
         {
             get
             {
@@ -49,7 +49,7 @@ namespace TestLibrary
             }
         }
 
-        public float z
+        public float Z
         {
             get
             {
@@ -114,14 +114,14 @@ namespace TestLibrary
             return (float)Math.Pow(Distance(input), 2);
         }
 
-        public float Dot(Vector3 input)
+        public float DotProduct(Vector3 input)
         {
-            return (_x * input.x + _y * input.y + _z * input.z);
+            return (_x * input.X + _y * input.Y + _z * input.Z);
         }
 
-        public Vector3 Cross(Vector3 Input)
+        public Vector3 CrossProduct(Vector3 Input)
         {
-            float varOne = (_y * Input.z) - (_z * Input._y);
+            float varOne = (_y * Input.Z) - (_z * Input._y);
             float varTwo = (_z * Input._x) - (_x * Input._z);
             float varThree = (_x * Input._y) - (_y * Input._x);
 
@@ -146,7 +146,7 @@ namespace TestLibrary
         {
             Vector3 a = GetNormalized();
             Vector3 b = GetNormalized();
-            return (float)Math.Acos(a.Dot(b));
+            return (float)Math.Acos(a.DotProduct(b));
         }
 
         public override string ToString()
