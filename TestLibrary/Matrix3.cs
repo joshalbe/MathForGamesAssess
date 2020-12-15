@@ -17,14 +17,25 @@ namespace TestLibrary
             m31 = 0; m32 = 0; m33 = 1;
         }
 
-        public Matrix3(
-            float m11, float m12, float m13,
-            float m21, float m22, float m23,
-            float m31, float m32, float m33)
+        public Matrix3(float m11, float m12, float m13, float m21, float m22, float m23, float m31, float m32, float m33)
         {
             this.m11 = m11; this.m12 = m12; this.m13 = m13;
             this.m21 = m21; this.m22 = m22; this.m23 = m23;
             this.m31 = m31; this.m32 = m32; this.m33 = m33;
+        }
+
+        public void Set(float m11, float m12, float m13, float m21, float m22, float m23, float m31, float m32, float m33)
+        {
+            this.m11 = m11; this.m12 = m12; this.m13 = m13;
+            this.m21 = m21; this.m22 = m22; this.m23 = m23;
+            this.m31 = m31; this.m32 = m32; this.m33 = m33;
+        }
+
+        public void Set(Matrix3 matrix3)
+        {
+            m11 = matrix3.m11; m12 = matrix3.m12; m13 = matrix3.m13;
+            m21 = matrix3.m21; m22 = matrix3.m22; m23 = matrix3.m23;
+            m31 = matrix3.m31; m32 = matrix3.m32; m33 = matrix3.m33;
         }
 
         public static Matrix3 CreateRotation(float radians)
@@ -42,7 +53,26 @@ namespace TestLibrary
                                1, 0, position.X,
                                0, 1, position.Y,
                                0, 0, 1);
-        } 
+        }
+
+        public void SetTranslation(float x, float y, float z)
+        {
+            m13 = x; m23 = y; m33 = z;
+        }
+
+        public void SetRotateZ(double radians)
+        {
+            Set((float)Math.Cos(radians), (float)-Math.Sin(radians), 0,
+                (float)Math.Sin(radians), (float)Math.Cos(radians), 0,
+                0, 0, 1);
+        }
+
+        public void RotateZ(double radians)
+        {
+            Matrix3 m = new Matrix3();
+            m.SetRotateZ(radians);
+            Set(this * m);
+        }
 
         public static Matrix3 CreateScale(float xScale, float yScale)
         {

@@ -23,6 +23,7 @@
 ********************************************************************************************/
 using MathForGames;
 using System;
+using TestLibrary;
 
 namespace raygamecsharp
 {
@@ -32,7 +33,14 @@ namespace raygamecsharp
         {
 
             //Create a new instance of the game class
-            Game game = new Game();
+            Game game = new Game(1280, 760, "Asteroid Game");
+
+            Actor root = new Actor();
+            game.Root = root;
+
+            LevelController levelController = new LevelController(root);
+
+            root.AddChild(levelController);
 
             //Call run to begin the game.
             game.Run();

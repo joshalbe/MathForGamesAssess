@@ -3,59 +3,68 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using TestLibrary;
+using Raylib_cs;
+using RL = Raylib_cs.Raylib;
 
 namespace MathForGames
 {
     class Game
     {
-        private static bool _gameOver = false;
+        //The current root Actor
+        private Actor _root = null;
+        //The next root Actor
+        private Actor _next = null;
+        //The Timer for the entire Game
+        private Timer _gameTimer = new Timer();
 
-        //Static function used to set game over without an instance of game.
-        public static void SetGameOver(bool value)
+        //Creates a Game and new Scene instance as its active Scene
+        public Game(int width, int height, string title)
         {
-            _gameOver = value;
+            RL.InitWindow(width, height, title);
+            RL.SetTargetFPS(0);
         }
 
-
-        //Called when the game begins. Use this for initialization.
-        public void Start()
-        {
-
-        }
-
-
-        //Called every frame.
-        public void Update()
-        {
-
-        }
-
-        //Used to display objects and other info on the screen.
-        public void Draw()
-        {
-
-        }
-
-
-        //Called when the game ends.
-        public void End()
-        {
-
-        }
-
-
-        //Handles all of the main game logic including the main game loop.
+        //Run the game loop
         public void Run()
         {
-            Start();
-
-            while(!_gameOver)
+            //Update and draw until the game is over
+            while (!RL.WindowShouldClose())
             {
-                Update();
-                Draw();
+                //Change the Scene if needed
+                if (_root != _next)
+                {
+                    _root = _next;
+                }
+
+                //Start the Scene if needed
+                if (!_root.Started)
+                {
+                    _root.Start();
+                }
+
+                //Update the active Scene
+                _root.Update(_gameTimer.GetDeltaTime());
+
+                //Draw the active Scene
+                RL.BeginDrawing();
+                RL.ClearBackground(Color.BLACK);
+                _root.Draw();
+                RL.EndDrawing();
             }
 
-            End();
+            //End the game
+            RL.CloseWindow();
+        }
+
+        //The Actor we are currently running
+        public Actor Root
+        {
+            get { return _root; }
+            set
+            {
+                _next = value;
+                if (_root == null) _root = value;
+            }
         }
     }
 }
