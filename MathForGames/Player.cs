@@ -9,7 +9,7 @@ namespace MathForGames
 {
     class Player : Entity
     {
-        private Sprite _sprite = new Sprite("Images/playerShip2_blue.png");
+        private Sprite _sprite = new Sprite("Images/playerShip1_blue.png");
         private Turret _turret = new Turret(0, 0);
 
         public int _hp = 10;

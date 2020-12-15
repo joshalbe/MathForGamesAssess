@@ -11,26 +11,7 @@ namespace MathForGames
 
         public ObstacleGeneration()
         {
-
-            for (int i = 1; i < 22; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    Obstacle _wallH = new Obstacle(46 + (54 * i), 100);
-                    AddChild(_wallH);
-                }
-            }
-
-            for (int i = 1; i < 22; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    Obstacle _wallH = new Obstacle(46 + (54 * i), 676);
-                    AddChild(_wallH);
-                }
-            }
-
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < 5; i++)
             {
                 if (i % 2 == 0)
                 {
@@ -39,7 +20,7 @@ namespace MathForGames
                 }
             }
 
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < 5; i++)
             {
                 if (i % 2 == 0)
                 {
