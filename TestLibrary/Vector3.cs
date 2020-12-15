@@ -12,146 +12,100 @@ namespace TestLibrary
         private float _y;
         private float _z;
 
-        //static refernce to identity matrix
-        public Vector3() : this(0f, 0f, 0f)
-        {
-
-        }
-
-        public Vector3(float X, float Y, float Z)
-        {
-            _x = X;
-            _y = Y;
-            _z = Z;
-        }
-
         public float X
         {
-            get
-            {
-                return _x;
-            }
-            set
-            {
-                _x = value;
-            }
+            get { return _x; }
+            set { _x = value; }
         }
 
         public float Y
         {
-            get
-            {
-                return _y;
-            }
-            set
-            {
-                _y = value;
-            }
+            get { return _y; }
+            set { _y = value; }
         }
 
         public float Z
         {
-            get
-            {
-                return _z;
-            }
-            set
-            {
-                _z = value;
-            }
+            get { return _z; }
+            set { _z = value; }
         }
 
-        public static Vector3 operator /(Vector3 lhs, float rhs)
+        public float Magnitude
         {
-            return new Vector3(lhs._x / rhs, lhs._y / rhs, lhs._z / rhs);
+            get { return (float)Math.Sqrt(X * X + Y * Y + Z * Z); }
         }
 
-        public static Vector3 operator *(Vector3 lhs, float rhs)
+        public Vector3 Normalized
         {
-            return new Vector3(lhs._x * rhs, lhs._y * rhs, lhs._z * rhs);
+            get { return Normalize(this); }
         }
 
-        public static Vector3 operator *(float rhs, Vector3 lhs)
+        public Vector3()
         {
-            return new Vector3(lhs._x * rhs, lhs._y * rhs, lhs._z * rhs);
+            _x = 0;
+            _y = 0;
+            _z = 0;
         }
 
-        public static Vector3 operator -(Vector3 lhs, float rhs)
+        public Vector3(float x, float y, float z)
         {
-            return new Vector3(lhs._x - rhs, lhs._y - rhs, lhs._z - rhs);
+            _x = x;
+            _y = y;
+            _z = z;
         }
 
-        public static Vector3 operator -(Vector3 rhs, Vector3 lhs)
+        
+        public static Vector3 Normalize(Vector3 vector)
         {
-            return new Vector3(rhs._x - lhs._x, rhs._y - lhs._y, rhs._z - lhs._z);
+            if (vector.Magnitude == 0)
+                return new Vector3();
+            return vector / vector.Magnitude;
         }
 
-        public static Vector3 operator +(Vector3 rhs, Vector3 lhs)
+        
+        public static float DotProduct(Vector3 lhs, Vector3 rhs)
         {
-            return new Vector3(lhs._x + rhs._x, lhs._y + rhs._y, lhs._z + rhs._z);
-        }
+            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y) + (lhs.Z * rhs.Z);
+        } 
 
-        public float Magnitude()
+        public static Vector3 CrossProduct(Vector3 lhs, Vector3 rhs)
         {
-            return (float)Math.Sqrt(_x * _x + _y * _y + _z * _z);
-        }
+            return new Vector3(lhs.Y * rhs.Z - lhs.Z * rhs.Y, 
+                               lhs.Z * rhs.X - lhs.X * rhs.Z,
+                               lhs.X * rhs.Y - lhs.Y * rhs.X);
+        } 
 
-        public float MagnitudeSqr()
+        public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
         {
-            return (_x * _x + _y * _y + _z * _z);
-        }
+            return new Vector3(
+                rhs.X * lhs.m11 + rhs.Y * lhs.m12 + rhs.Z * lhs.m13,
+                rhs.X * lhs.m21 + rhs.Y * lhs.m22 + rhs.Z * lhs.m23,
+                rhs.X * lhs.m31 + rhs.Y * lhs.m32 + rhs.Z * lhs.m33);
+        } 
 
-        public float Distance(Vector3 input)
+        public static Vector3 operator +(Vector3 lhs, Vector3 rhs)
         {
-            float DiffX = _x - input._x;
-            float DiffY = _y - input._y;
-            float DiffZ = _z - input._z;
-            return (float)Math.Sqrt(DiffX * DiffX + DiffY * DiffY + DiffZ * DiffZ);
-        }
+            return new Vector3(lhs.X + rhs.X, lhs.Y + rhs.Y, lhs.Z + rhs.Z);
+        } 
 
-        public float DistanceSq(Vector3 input)
+        public static Vector3 operator -(Vector3 lhs, Vector3 rhs)
         {
-            return (float)Math.Pow(Distance(input), 2);
-        }
+            return new Vector3(lhs.X - rhs.X, lhs.Y - rhs.Y, lhs.Z - rhs.Z);
+        } 
 
-        public float DotProduct(Vector3 input)
+        public static Vector3 operator *(Vector3 lhs, float scalar)
         {
-            return (_x * input.X + _y * input.Y + _z * input.Z);
-        }
+            return new Vector3(lhs.X * scalar, lhs.Y * scalar, lhs.Z * scalar);
+        } 
 
-        public Vector3 CrossProduct(Vector3 Input)
+        public static Vector3 operator *(float scalar, Vector3 lhs)
         {
-            float varOne = (_y * Input.Z) - (_z * Input._y);
-            float varTwo = (_z * Input._x) - (_x * Input._z);
-            float varThree = (_x * Input._y) - (_y * Input._x);
+            return new Vector3(lhs.X * scalar, lhs.Y * scalar, lhs.Z * scalar);
+        } 
 
-            Vector3 answer = new Vector3(varOne, varTwo, varThree);
-            return answer;
-        }
-
-        public void Normalize()
+        public static Vector3 operator /(Vector3 lhs, float scalar)
         {
-            float m = Magnitude();
-            _x /= m;
-            _y /= m;
-            _z /= m;
-        }
-
-        public Vector3 GetNormalized()
-        {
-            return (this / Magnitude());
-        }
-
-        public float Angle(Vector3 input)
-        {
-            Vector3 a = GetNormalized();
-            Vector3 b = GetNormalized();
-            return (float)Math.Acos(a.DotProduct(b));
-        }
-
-        public override string ToString()
-        {
-            return "[" + _x + "," + _y + "," + _z + "]";
-        }
+            return new Vector3(lhs.X / scalar, lhs.Y / scalar, lhs.Z / scalar);
+        } 
     }
 }
