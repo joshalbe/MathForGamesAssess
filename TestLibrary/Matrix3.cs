@@ -10,6 +10,7 @@ namespace TestLibrary
     {
         public float m11, m12, m13, m21, m22, m23, m31, m32, m33;
 
+        //Matrix3 Constructor
         public Matrix3()
         {
             m11 = 1; m12 = 0; m13 = 0;
@@ -17,6 +18,7 @@ namespace TestLibrary
             m31 = 0; m32 = 0; m33 = 1;
         }
 
+        //Custom Matrix3 Constructor
         public Matrix3(float m11, float m12, float m13, float m21, float m22, float m23, float m31, float m32, float m33)
         {
             this.m11 = m11; this.m12 = m12; this.m13 = m13;
@@ -40,6 +42,7 @@ namespace TestLibrary
 
         public static Matrix3 CreateRotation(float radians)
         {
+            //rotates the Matrix based on the given radians
             return new Matrix3(
                                (float)(Math.Cos(radians)), (float)(Math.Sin(radians)), 0,
                                (float)(-1 * Math.Sin(radians)), (float)(Math.Cos(radians)), 0,
@@ -49,6 +52,7 @@ namespace TestLibrary
 
         public static Matrix3 CreateTranslation(Vector2 position)
         {
+            //Translates the Matrix3 to a new given position
             return new Matrix3(
                                1, 0, position.X,
                                0, 1, position.Y,
@@ -76,6 +80,7 @@ namespace TestLibrary
 
         public static Matrix3 CreateScale(float xScale, float yScale)
         {
+            //Scales the Matrix3 according to given x and y
             return new Matrix3(
                                xScale, 0, 0,
                                0, yScale, 0,
@@ -84,6 +89,7 @@ namespace TestLibrary
 
         public static Matrix3 operator +(Matrix3 lhs, Matrix3 rhs)
         {
+            //Adds matrices
             return new Matrix3(
                 lhs.m11 + rhs.m11, lhs.m12 + rhs.m12, lhs.m13 + rhs.m13,
                 lhs.m21 + rhs.m21, lhs.m22 + rhs.m22, lhs.m23 + rhs.m23,
@@ -92,6 +98,7 @@ namespace TestLibrary
 
         public static Matrix3 operator -(Matrix3 lhs, Matrix3 rhs)
         {
+            //subtracts two matrices
             return new Matrix3(
                 lhs.m11 - rhs.m11, lhs.m12 - rhs.m12, lhs.m13 - rhs.m13,
                 lhs.m21 - rhs.m21, lhs.m22 - rhs.m22, lhs.m23 - rhs.m23,
@@ -100,6 +107,8 @@ namespace TestLibrary
 
         public static Matrix3 operator *(Matrix3 lhs, Matrix3 rhs)
         {
+
+            //Multiplies matrices
             return new Matrix3(
                 lhs.m11 * rhs.m11 + lhs.m12 * rhs.m21 + lhs.m13 * rhs.m31, 
                 lhs.m11 * rhs.m12 + lhs.m12 * rhs.m22 + lhs.m13 * rhs.m32, 

@@ -10,6 +10,7 @@ namespace TestLibrary
     {
         public float m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44;
 
+        //Matrix4 base constructor
         public Matrix4()
         {
             m11 = 1; m12 = 0; m13 = 0; m14 = 0;
@@ -18,6 +19,7 @@ namespace TestLibrary
             m41 = 0; m42 = 0; m43 = 0; m44 = 1;
         }
 
+        //Custom constructor
         public Matrix4(
             float m11, float m12, float m13, float m14,
             float m21, float m22, float m23, float m24,
@@ -32,6 +34,7 @@ namespace TestLibrary
 
         public static Matrix4 CreateRotationX(float radians)
         {
+            //Rotates the X axis according to the given radians
             return new Matrix4(
                                1, 0, 0, 0,
                                0, (float)Math.Cos(radians), (float)Math.Sin(radians), 0,
@@ -41,6 +44,7 @@ namespace TestLibrary
 
         public static Matrix4 CreateRotationY(float radians)
         {
+            //Rotates the Y axis according to the given radians
             return new Matrix4(
                                (float)(Math.Cos(radians)), 0, (float)(-1 * Math.Sin(radians)), 0,
                                0, 1, 0, 0,
@@ -50,6 +54,7 @@ namespace TestLibrary
 
         public static Matrix4 CreateRotationZ(float radians)
         {
+            //Rotates the Z axis according to the given radians
             return new Matrix4(
                                (float)(Math.Cos(radians)), (float)(Math.Sin(radians)), 0, 0,
                                (float)(-1 * Math.Sin(radians)), (float)(Math.Cos(radians)), 0, 0,
@@ -59,6 +64,7 @@ namespace TestLibrary
 
         public static Matrix4 CreateTranslation(Vector3 position)
         {
+            //Translates the Matrix4 to a new given position
             return new Matrix4(
                                1, 0, 0, position.X,
                                0, 1, 0, position.Y,
@@ -68,6 +74,7 @@ namespace TestLibrary
 
         public static Matrix4 CreateScale(float xScale, float yScale, float zScale)
         {
+            //Scales the Matrix4 on specific axes
             return new Matrix4(
                                xScale, 0, 0, 0,
                                0, yScale, 0, 0,
@@ -78,6 +85,7 @@ namespace TestLibrary
         
         public static Matrix4 CreateScale(float scale)
         {
+            //Scales the entire matrix according to a float
             return new Matrix4(
                                scale, 0, 0, 0,
                                0, scale, 0, 0,
@@ -87,6 +95,7 @@ namespace TestLibrary
 
         public static Matrix4 operator +(Matrix4 lhs, Matrix4 rhs)
         {
+            //Adds two matrices
             return new Matrix4(
                 lhs.m11 + rhs.m11, lhs.m12 + rhs.m12, lhs.m13 + rhs.m13, lhs.m14 + rhs.m14,
                 lhs.m21 + rhs.m21, lhs.m22 + rhs.m22, lhs.m23 + rhs.m23, lhs.m24 + rhs.m24,
@@ -96,6 +105,7 @@ namespace TestLibrary
 
         public static Matrix4 operator -(Matrix4 lhs, Matrix4 rhs)
         {
+            //Subtracts two matrices
             return new Matrix4(
                 lhs.m11 - rhs.m11, lhs.m12 - rhs.m12, lhs.m13 - rhs.m13, lhs.m14 - rhs.m14,
                 lhs.m21 - rhs.m21, lhs.m22 - rhs.m22, lhs.m23 - rhs.m23, lhs.m24 - rhs.m24,
@@ -105,6 +115,7 @@ namespace TestLibrary
 
         public static Matrix4 operator *(Matrix4 lhs, Matrix4 rhs)
         {
+            //Multiplies two matrices
             return new Matrix4(
                 lhs.m11 * rhs.m11 + lhs.m12 * rhs.m21 + lhs.m13 * rhs.m31 + lhs.m14 * rhs.m41, 
                 lhs.m11 * rhs.m12 + lhs.m12 * rhs.m22 + lhs.m13 * rhs.m32 + lhs.m14 * rhs.m42, 

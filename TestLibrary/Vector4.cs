@@ -13,40 +13,47 @@ namespace TestLibrary
         private float _z;
         private float _w;
 
+        //Get-Set X
         public float X
         {
             get { return _x; }
             set { _x = value; }
-        } 
+        }
 
+        //Get-Set Y
         public float Y
         {
             get { return _y; }
             set { _y = value; }
-        } 
+        }
 
+        //Get-Set Z
         public float Z
         {
             get { return _z; }
             set { _z = value; }
-        } 
+        }
 
+        //Get-Set W
         public float W
         {
             get { return _w; }
             set { _w = value; }
         } 
 
+        //get the magnitude of a vector4
         public float Magnitude
         {
             get { return (float)Math.Sqrt(X * X + Y * Y + Z * Z + W * W); }
         } 
 
+        //get the normalization of a vector4
         public Vector4 Normalized
         {
             get { return Normalize(this); }
         } 
 
+        //basic vector4 constructor
         public Vector4()
         {
             _x = 0;
@@ -55,6 +62,7 @@ namespace TestLibrary
             _w = 0;
         } 
 
+        //custom vector4 constructor
         public Vector4(float x, float y, float z, float w)
         {
             _x = x;
@@ -63,6 +71,7 @@ namespace TestLibrary
             _w = w;
         } 
 
+        //normalize a vector4
         public static Vector4 Normalize(Vector4 vector)
         {
             if (vector.Magnitude == 0)
