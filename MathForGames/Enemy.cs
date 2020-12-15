@@ -11,7 +11,7 @@ namespace MathForGames
     {
         private Sprite _sprite = new Sprite("Images/enemyBlack5.png");
 
-        public int _hp = 10;
+        public int _hp = 3;
 
         public AABB _hitbox;
 

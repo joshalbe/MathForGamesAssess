@@ -19,7 +19,7 @@ namespace MathForGames
 
         private Stopwatch _timer = new Stopwatch();
 
-        float SpeedCap = 25;
+        float SpeedCap = 50;
         //25 - 50
 
         public Player(float x, float y) : base(x, y)
@@ -51,22 +51,22 @@ namespace MathForGames
         {
             if (Input.IsKeyDown(87))
             {
-                XAcceleration = (float)Math.Cos(GetRotation() - Math.PI * .5f) * 15;
-                YAcceleration = (float)Math.Sin(GetRotation() - Math.PI * .5f) * 15;
+                XAcceleration = (float)Math.Cos(GetRotation() - Math.PI * 2.5f) * 30;
+                YAcceleration = (float)Math.Sin(GetRotation() - Math.PI * 2.5f) * 30;
 
             }
             if (Input.IsKeyDown(83))
             {
-                XAcceleration = (float)Math.Cos(GetRotation() - Math.PI * .5f) * -15;
-                YAcceleration = (float)Math.Sin(GetRotation() - Math.PI * .5f) * -15;
+                XAcceleration = (float)Math.Cos(GetRotation() - Math.PI * 2.5f) * -40;
+                YAcceleration = (float)Math.Sin(GetRotation() - Math.PI * 2.5f) * -40;
             }
             if (Input.IsKeyDown(68))
             {
-                Rotate(1f * deltatime);
+                Rotate(2f * deltatime);
             }
             if (Input.IsKeyDown(65))
             {
-                Rotate(-1f * deltatime);
+                Rotate(-2f * deltatime);
             }
             if (Input.IsKeyDown(69))
             {

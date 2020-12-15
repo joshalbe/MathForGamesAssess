@@ -20,15 +20,6 @@ namespace MathForGames
                 }
             }
 
-            for (int i = 1; i < 5; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    Obstacle _wallV = new Obstacle(1180, 100 + (54 * i));
-                    AddChild(_wallV);
-                }
-            }
-
 
             //Level 1
             //if (LevelController.currentLevel == 1)
@@ -47,14 +38,7 @@ namespace MathForGames
                 }
             }
 
-            for (int i = 1; i < 22; i++)
-            {
-                if (i > 1 && i < 7 && i % 2 == 0)
-                {
-                    Obstacle _wallH = new Obstacle(46 + (54 * i), 500);
-                    AddChild(_wallH);
-                }
-            }
+            
 
             for (int i = 1; i < 22; i++)
             {
