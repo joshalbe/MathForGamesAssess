@@ -79,6 +79,7 @@ namespace TestLibrary
             return vector / vector.Magnitude;
         } 
 
+        //find the dotproduct of two vectors
         public static float DotProduct(Vector4 lhs, Vector4 rhs)
         {
             return (lhs.X * rhs.X) + (lhs.Y * rhs.Y) + (lhs.Z * rhs.Z) + (lhs.W * rhs.W);
